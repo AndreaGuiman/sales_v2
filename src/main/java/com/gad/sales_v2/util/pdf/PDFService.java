@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class PDFService {
     private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
-    public static void createAndSave(Order order, Liamed liamed) throws FileNotFoundException, MalformedURLException {
+    public static void createAndSave(Order order) throws FileNotFoundException, MalformedURLException {
         order.setDateOfOrder(LocalDateTime.now());
         order.setDateOfSending(LocalDateTime.now().plusDays(1));
         PdfWriter pdfWriter = new PdfWriter(String.format(
@@ -36,7 +36,7 @@ public class PDFService {
         Table tableHeader = new Table(UnitValue.createPercentArray(colWidthsTableHeader));
         tableHeader.setWidth(UnitValue.createPercentValue(85));
         tableHeader.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        addInvoiceInfo(tableHeader, order, liamed);
+        addInvoiceInfo(tableHeader, order);
         removeBorders(tableHeader);
 
         float[] colWidthsTableProducts = new float[]{7, 46, 7, 10, 10, 10, 10};
@@ -62,9 +62,9 @@ public class PDFService {
         document.close();
     }
 
-    private static void addInvoiceInfo(Table table, Order order, Liamed liamed) throws MalformedURLException {
+    private static void addInvoiceInfo(Table table, Order order) throws MalformedURLException {
         table.addCell(getCell(
-                String.format("Furnizor: %s", liamed.getFullName()),
+                String.format("Furnizor: %s", "AGMed SRL"),
                 8,
                 TextAlignment.LEFT
         ));
@@ -80,7 +80,7 @@ public class PDFService {
         ));
 
         table.addCell(getCell(
-                String.format("Nr. Reg. Com.: %s", liamed.getRegisterNumber()),
+                String.format("Nr. Reg. Com.: %s", "J08/100/1900"),
                 8,
                 TextAlignment.LEFT
         ));
@@ -90,13 +90,13 @@ public class PDFService {
                 TextAlignment.CENTER
         ));
         table.addCell(getCell(
-                String.format("Nr. Reg. Com.: %s", liamed.getRegisterNumber()),
+                String.format("Nr. Reg. Com.: %s", "J08/100/1900"),
                 8,
                 TextAlignment.RIGHT
         ));
 
         table.addCell(getCell(
-                String.format("C.I.F.: %s", liamed.getVatNumber()),
+                String.format("C.I.F.: %s", "10188800"),
                 8,
                 TextAlignment.LEFT
         ));
@@ -106,13 +106,13 @@ public class PDFService {
                 TextAlignment.CENTER
         ));
         table.addCell(getCell(
-                String.format("C.I.F.: %s", liamed.getVatNumber()),
+                String.format("C.I.F.: %s", order.getClient().getVatOrIdNumber()),
                 8,
                 TextAlignment.RIGHT
         ));
 
         table.addCell(getCell(
-                String.format("Sediul: %s", liamed.getAddress()),
+                String.format("Sediul: %s", "Strada Grivitei Nr 27"),
                 8,
                 TextAlignment.LEFT
         ));
@@ -122,13 +122,13 @@ public class PDFService {
                 TextAlignment.CENTER
         ));
         table.addCell(getCell(
-                String.format("Sediul: %s", ""),
+                String.format("Sediul: %s", order.getClient().getAddress()),
                 8,
                 TextAlignment.RIGHT
         ));
 
         table.addCell(getCell(
-                String.format("Banca: %s", liamed.getBank()),
+                String.format("Banca: %s", "BCR"),
                 8,
                 TextAlignment.LEFT
         ));

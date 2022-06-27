@@ -46,7 +46,7 @@ public class DatabaseConfig {
                     )
             );
             orderRepository.save(order);
-            PDFService.createAndSave(order, new Liamed());
+            PDFService.createAndSave(order);
         };
     }
 }

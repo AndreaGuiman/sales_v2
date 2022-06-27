@@ -281,7 +281,7 @@ public class OrderService {
     private LocalDateTime getDateOfSending(LocalDateTime localDateTime){
         return LocalDateTime.of(
                 localDateTime.toLocalDate().plusDays(1),
-                LocalTime.of(8, 0)
+                LocalTime.of(17, 0)
         );
     }
     
@@ -358,18 +358,14 @@ public class OrderService {
     }
 
     private void createPDF(Order order) throws MalformedURLException, FileNotFoundException {
-        Liamed liamed = new Liamed();
-        PDFService.createAndSave(order, liamed);
+        PDFService.createAndSave(order);
     }
 
-    public Order cancelOrder(Long id) throws InterruptedException {
+    public Order cancelOrder(Long id) {
         Order order = orderRepository.getById(id);
-        System.out.println(order);
         order.setStatus("CANCELED");
         order = orderRepository.save(order);
-        System.out.println(order);
         order = orderRepository.getById(id);
-        System.out.println(order);
         return order;
     }
 

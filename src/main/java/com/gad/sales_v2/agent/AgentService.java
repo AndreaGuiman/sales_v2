@@ -48,14 +48,6 @@ public class AgentService {
         return agentRepository.save(agent);
     }
 
-    public Iterable<Agent> saveOrUpdateAll(List<Agent> agents){
-        return agentRepository.saveAll(agents);
-    }
-
-    public Agent getById(Long id){
-        return agentRepository.getById(id);
-    }
-
     public AgentDTO getByUserId(Long id){
         return getAgentDTO(agentRepository.getByUserId(id));
     }

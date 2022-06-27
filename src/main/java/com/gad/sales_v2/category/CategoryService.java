@@ -85,7 +85,7 @@ public class CategoryService {
     }
 
     private String getImgBase64(String imagePath) throws IOException {
-        String imgBase64 = "data:image/png;base64,";
+        String imgBase64= "data:image/png;base64,";
         File image = new File(imagePath);
         byte[] fileContent = FileUtils.readFileToByteArray(image);
         return imgBase64.concat(Base64.encodeBase64String(fileContent));

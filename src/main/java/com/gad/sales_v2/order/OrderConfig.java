@@ -37,6 +37,7 @@ public class OrderConfig {
         createOrdersForAgent1(orderRepository, agentRepository, clientRepository, productRepository, liamed);
         createOrdersForAgent2(orderRepository, agentRepository, clientRepository, productRepository, liamed);
         createOrdersForAgent3(orderRepository, agentRepository, clientRepository, productRepository, liamed);
+        createOrdersForAgent4(orderRepository, agentRepository, clientRepository, productRepository, liamed);
     }
 
     private static void createOrdersForAgent1(OrderRepository orderRepository, AgentRepository agentRepository, ClientRepository clientRepository,
@@ -707,6 +708,168 @@ public class OrderConfig {
         saveOrderAndCreatePDF(orderRepository, liamed, orders);
     }
 
+    private static void createOrdersForAgent4(OrderRepository orderRepository, AgentRepository agentRepository, ClientRepository clientRepository,
+                                              ProductRepository productRepository, Liamed liamed){
+        Agent agent = getAgent(agentRepository, 4L);
+        List<Order> orders = List.of(
+                getOrder(
+                        agent,
+                        clientRepository,
+                        7L,
+                        productRepository,
+                        LocalDateTime.of(
+                                2022,
+                                1,
+                                6,
+                                14,
+                                53
+                        ),
+                        12L, 12L, 3L, 1L
+                ),
+                getOrder(
+                        agent,
+                        clientRepository,
+                        4L,
+                        productRepository,
+                        LocalDateTime.of(
+                                2022,
+                                1,
+                                12,
+                                16,
+                                53
+                        ),
+                        3L, 4L
+                ),
+                getOrder(
+                        agent,
+                        clientRepository,
+                        2L,
+                        productRepository,
+                        LocalDateTime.of(
+                                2022,
+                                1,
+                                15,
+                                11,
+                                23
+                        ),
+                        2L, 1L, 6L, 7L
+                ),
+                getOrder(
+                        agent,
+                        clientRepository,
+                        6L,
+                        productRepository,
+                        LocalDateTime.of(
+                                2022,
+                                1,
+                                16,
+                                14,
+                                27
+                        ),
+                        2L, 1L
+                ),
+                getOrder(
+                        agent,
+                        clientRepository,
+                        4L,
+                        productRepository,
+                        LocalDateTime.of(
+                                2022,
+                                2,
+                                25,
+                                14,
+                                53
+                        ),
+                        1L, 3L
+                ),
+                getOrder(
+                        agent,
+                        clientRepository,
+                        1L,
+                        productRepository,
+                        LocalDateTime.of(
+                                2022,
+                                2,
+                                22,
+                                14,
+                                53
+                        ),
+                        13L, 7L, 8L, 9L
+                ),
+                getOrder(
+                        agent,
+                        clientRepository,
+                        6L,
+                        productRepository,
+                        LocalDateTime.of(
+                                2022,
+                                3,
+                                7,
+                                11,
+                                23
+                        ),
+                        7L, 8L, 9L
+                ),
+                getOrder(
+                        agent,
+                        clientRepository,
+                        4L,
+                        productRepository,
+                        LocalDateTime.of(
+                                2022,
+                                4,
+                                12,
+                                14,
+                                53
+                        ),
+                        1L, 3L, 5L, 12L
+                ),
+                getOrder(
+                        agent,
+                        clientRepository,
+                        5L,
+                        productRepository,
+                        LocalDateTime.of(
+                                2022,
+                                5,
+                                9,
+                                16,
+                                3
+                        ),
+                        10L, 16L, 1L, 4L, 6L
+                ),
+                getOrder(
+                        agent,
+                        clientRepository,
+                        8L,
+                        productRepository,
+                        LocalDateTime.of(
+                                2022,
+                                5,
+                                11,
+                                14,
+                                53
+                        ),
+                        1L, 3L, 9L, 10L, 11L
+                ),
+                getOrder(
+                        agent,
+                        clientRepository,
+                        7L,
+                        productRepository,
+                        LocalDateTime.of(
+                                2022,
+                                5,
+                                14,
+                                9,
+                                46
+                        ),
+                        2L, 12L, 13L, 4L, 1L, 3L, 5L, 7L
+                )
+        );
+        saveOrderAndCreatePDF(orderRepository, liamed, orders);
+    }
+
     private static void saveOrderAndCreatePDF(OrderRepository orderRepository, Liamed liamed, List<Order> orders) {
         orders.forEach(order -> {
             Order tempOrder = orderRepository.save(new Order(
@@ -720,7 +883,7 @@ public class OrderConfig {
                     order.getProductQuantities()
             ));
             try {
-                createPDF(tempOrder, liamed);
+                createPDF(tempOrder);
             } catch (MalformedURLException | FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -809,8 +972,8 @@ public class OrderConfig {
         );
     }
 
-    private static void createPDF(Order order, Liamed liamed) throws MalformedURLException, FileNotFoundException {
-        PDFService.createAndSave(order, liamed);
+    private static void createPDF(Order order) throws MalformedURLException, FileNotFoundException {
+        PDFService.createAndSave(order);
     }
 }
 
