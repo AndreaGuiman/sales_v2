@@ -2,7 +2,6 @@ package com.gad.sales_v2.util.pdf;
 
 import com.gad.sales_v2.order.Order;
 import com.gad.sales_v2.product_quantity.ProductQuantity;
-import com.gad.sales_v2.util.entity.Liamed;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;

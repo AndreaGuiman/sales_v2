@@ -7,7 +7,6 @@ import com.gad.sales_v2.client.ClientRepository;
 import com.gad.sales_v2.product.Product;
 import com.gad.sales_v2.product.ProductRepository;
 import com.gad.sales_v2.product_quantity.ProductQuantity;
-import com.gad.sales_v2.util.entity.Liamed;
 import com.gad.sales_v2.util.pdf.PDFService;
 
 import java.io.FileNotFoundException;
@@ -28,20 +27,19 @@ public class OrderConfig {
 
     public static void createAndSaveOrders(OrderRepository orderRepository, AgentRepository agentRepository, ClientRepository clientRepository,
                                            ProductRepository productRepository) {
-        Liamed liamed = new Liamed();
-        createOrdersForAllAgents(orderRepository, agentRepository, clientRepository, productRepository, liamed);
+        createOrdersForAllAgents(orderRepository, agentRepository, clientRepository, productRepository);
     }
 
     private static void createOrdersForAllAgents(OrderRepository orderRepository, AgentRepository agentRepository, ClientRepository clientRepository,
-                                                 ProductRepository productRepository, Liamed liamed) {
-        createOrdersForAgent1(orderRepository, agentRepository, clientRepository, productRepository, liamed);
-        createOrdersForAgent2(orderRepository, agentRepository, clientRepository, productRepository, liamed);
-        createOrdersForAgent3(orderRepository, agentRepository, clientRepository, productRepository, liamed);
-        createOrdersForAgent4(orderRepository, agentRepository, clientRepository, productRepository, liamed);
+                                                 ProductRepository productRepository) {
+        createOrdersForAgent1(orderRepository, agentRepository, clientRepository, productRepository);
+        createOrdersForAgent2(orderRepository, agentRepository, clientRepository, productRepository);
+        createOrdersForAgent3(orderRepository, agentRepository, clientRepository, productRepository);
+        createOrdersForAgent4(orderRepository, agentRepository, clientRepository, productRepository);
     }
 
     private static void createOrdersForAgent1(OrderRepository orderRepository, AgentRepository agentRepository, ClientRepository clientRepository,
-                                              ProductRepository productRepository, Liamed liamed) {
+                                              ProductRepository productRepository) {
         Agent agent = getAgent(agentRepository, 1L);
         List<Order> orders = List.of(
                 getOrder(
@@ -283,11 +281,11 @@ public class OrderConfig {
                         1L, 3L, 6L
                 )
         );
-        saveOrderAndCreatePDF(orderRepository, liamed, orders);
+        saveOrderAndCreatePDF(orderRepository, orders);
     }
 
     private static void createOrdersForAgent2(OrderRepository orderRepository, AgentRepository agentService, ClientRepository clientRepository,
-                                              ProductRepository productRepository, Liamed liamed){
+                                              ProductRepository productRepository){
         Agent agent = getAgent(agentService, 2L);
         List<Order> orders = List.of(
                 getOrder(
@@ -543,11 +541,11 @@ public class OrderConfig {
                         2L, 12L, 3L, 14L, 1L, 3L, 5L, 7L
                 )
         );
-        saveOrderAndCreatePDF(orderRepository, liamed, orders);
+        saveOrderAndCreatePDF(orderRepository, orders);
     }
 
     private static void createOrdersForAgent3(OrderRepository orderRepository, AgentRepository agentRepository, ClientRepository clientRepository,
-                                              ProductRepository productRepository, Liamed liamed){
+                                              ProductRepository productRepository){
         Agent agent = getAgent(agentRepository, 3L);
         List<Order> orders = List.of(
                 getOrder(
@@ -705,11 +703,11 @@ public class OrderConfig {
                         2L, 12L, 13L, 4L, 1L, 3L, 5L, 7L
                 )
         );
-        saveOrderAndCreatePDF(orderRepository, liamed, orders);
+        saveOrderAndCreatePDF(orderRepository, orders);
     }
 
     private static void createOrdersForAgent4(OrderRepository orderRepository, AgentRepository agentRepository, ClientRepository clientRepository,
-                                              ProductRepository productRepository, Liamed liamed){
+                                              ProductRepository productRepository){
         Agent agent = getAgent(agentRepository, 4L);
         List<Order> orders = List.of(
                 getOrder(
@@ -867,10 +865,10 @@ public class OrderConfig {
                         2L, 12L, 13L, 4L, 1L, 3L, 5L, 7L
                 )
         );
-        saveOrderAndCreatePDF(orderRepository, liamed, orders);
+        saveOrderAndCreatePDF(orderRepository, orders);
     }
 
-    private static void saveOrderAndCreatePDF(OrderRepository orderRepository, Liamed liamed, List<Order> orders) {
+    private static void saveOrderAndCreatePDF(OrderRepository orderRepository, List<Order> orders) {
         orders.forEach(order -> {
             Order tempOrder = orderRepository.save(new Order(
                     order.getId(),
@@ -937,12 +935,6 @@ public class OrderConfig {
                 getDateOfSending(dateOfOrder),
                 productQuantities
         );
-    }
-
-    private static double getPrice(List<Product> products){
-        AtomicReference<Double> price = new AtomicReference<>((double) 0);
-        products.forEach(product -> price.updateAndGet(v -> v + product.getPrice()));
-        return Double.parseDouble(decimalFormat.format(price.get()));
     }
 
     private static double getPrice2(List<ProductQuantity> products){

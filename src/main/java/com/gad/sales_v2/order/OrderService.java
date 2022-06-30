@@ -5,7 +5,6 @@ import com.gad.sales_v2.client.Client;
 import com.gad.sales_v2.product.Product;
 import com.gad.sales_v2.product_quantity.ProductQuantity;
 import com.gad.sales_v2.util.entity.Graph;
-import com.gad.sales_v2.util.entity.Liamed;
 import com.gad.sales_v2.util.mail.Credentials;
 import com.gad.sales_v2.util.mail.MailService;
 import com.gad.sales_v2.util.pdf.PDFService;
@@ -112,12 +111,6 @@ public class OrderService {
             tempBeginDate = tempEndDate;
         }
         return graphs;
-    }
-
-    public List<Graph> getCategoriesSoldByAgent(Long idAgent, Integer numberOfCategories, String month){
-        Date beginDate = getBeginDate(month);
-        Date endDate = getEndDate(month);
-        return getGraphsFromCategory(orderRepository.getTopNCategoriesSoldByAgent(idAgent, beginDate, endDate), numberOfCategories);
     }
 
     public Graph getCategorySoldByAgent(Long idAgent, String month, String categoryName){
@@ -243,34 +236,6 @@ public class OrderService {
             return graphs;
         }
         return graphs.subList(0, numberOfElementsForGraph);
-    }
-
-    private List<Graph> getGraphsFromCategory(String[] strings, Integer numberOfElementsForGraph) {
-        List<Graph> graphs = new ArrayList<>();
-        System.out.println(Arrays.toString(strings));
-
-        System.out.println(getPriceOfProductsFromCategorySoldInAPeriod());
-//        AtomicReference<String> productName = new AtomicReference<>();
-//        AtomicReference<Integer> quantity = new AtomicReference<>();
-//        AtomicReference<AtomicReferenceArray<String>> tokens = new AtomicReference<>(null);
-//        Arrays.stream(strings).forEach(s -> {
-//            tokens.set(new AtomicReferenceArray<>(s.split(",")));
-//            productName.set(tokens.get().get(0));
-//            quantity.set(Integer.parseInt(tokens.get().get(1)));
-//            graphs.add(new Graph(productName.get(), quantity.get(), getPriceForGraph(productName.get(), quantity.get())));
-//        });
-//        graphs.sort(Comparator.comparing(Graph::getPriceOfSoldProducts).reversed());
-//        if(graphs.size() <= numberOfElementsForGraph){
-//            return graphs;
-//        }
-
-        return null;
-//        return graphs.subList(0, numberOfElementsForGraph);
-    }
-
-    private double getPriceOfProductsFromCategorySoldInAPeriod(){
-        double price = 0;
-        return price;
     }
 
     private double getPriceForGraph(String productName, Integer quantity){

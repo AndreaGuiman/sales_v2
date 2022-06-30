@@ -12,7 +12,6 @@ import com.gad.sales_v2.order.OrderRepository;
 import com.gad.sales_v2.product.ProductConfig;
 import com.gad.sales_v2.product.ProductRepository;
 import com.gad.sales_v2.product_quantity.ProductQuantity;
-import com.gad.sales_v2.util.entity.Liamed;
 import com.gad.sales_v2.util.pdf.PDFService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

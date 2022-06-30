@@ -243,38 +243,38 @@ public class ProductConfig {
                                 "Ambalate in cutie cate 60 buc",
                         true,
                         categoryService.getByName("Fizioterapie")),
-        new Product(getImagePath("Ham pentru transfer"),
-                "Ham pentru transfer",
-                1480, 60,
-                "Realizat din nylon.\n" +
-                        "Are suport pentru sustinerea picioarelor.\n" +
-                        "Lavabil la o temperatura de max 60 grade C. ",
-                true,
-                categoryService.getByName("Kinetoterapie")),
-        new Product(getImagePath("Targa pliabila"),
-                "Targa pliabila",
-                20, 3700,
-                "Prevazut cu clipsuri de prindere rapida \n" +
-                        "Dimensiuni: 65 x 180 cm \n" +
-                        "Capacitate sustinere: 160 Kg",
-                true,
-                categoryService.getByName("Kinetoterapie")),
-        new Product(getImagePath("Masa rabatabila"),
-                "Masa rabatabila",
-                1520, 890,
-                "\n" +
-                        "Descriere\n" +
-                        "Recomandata pentru sustinerea confortabila a mainilor.\n" +
-                        "Se poate regla pe inaltime si distanta fata de canapea.\n" +
-                        "Dimensiuni: 70 x 56 cm",
-                true,
-                categoryService.getByName("Kinetoterapie")),
-        new Product(getImagePath("Centura pentru abdomen"),
-                "Centura pentru abdomen",
-                220, 1600,
-                "",
-                true,
-                categoryService.getByName("Kinetoterapie")),
+                new Product(getImagePath("Ham pentru transfer"),
+                        "Ham pentru transfer",
+                        1480, 60,
+                        "Realizat din nylon.\n" +
+                                "Are suport pentru sustinerea picioarelor.\n" +
+                                "Lavabil la o temperatura de max 60 grade C. ",
+                        true,
+                        categoryService.getByName("Kinetoterapie")),
+                new Product(getImagePath("Targa pliabila"),
+                        "Targa pliabila",
+                        20, 3700,
+                        "Prevazut cu clipsuri de prindere rapida \n" +
+                                "Dimensiuni: 65 x 180 cm \n" +
+                                "Capacitate sustinere: 160 Kg",
+                        true,
+                        categoryService.getByName("Kinetoterapie")),
+                new Product(getImagePath("Masa rabatabila"),
+                        "Masa rabatabila",
+                        1520, 890,
+                        "\n" +
+                                "Descriere\n" +
+                                "Recomandata pentru sustinerea confortabila a mainilor.\n" +
+                                "Se poate regla pe inaltime si distanta fata de canapea.\n" +
+                                "Dimensiuni: 70 x 56 cm",
+                        true,
+                        categoryService.getByName("Kinetoterapie")),
+                new Product(getImagePath("Centura pentru abdomen"),
+                        "Centura pentru abdomen",
+                        220, 1600,
+                        "",
+                        true,
+                        categoryService.getByName("Kinetoterapie")),
                 new Product(getImagePath("Valva de biopsie"),
                         "Valva de biopsie",
                         130, 1400,

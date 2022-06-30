@@ -61,13 +61,6 @@ public class OrderController {
     }
 
     @Transactional
-    @GetMapping("categories-by-agent/{idAgent}/{numberOfCategories}/{month}")
-    public List<Graph> getCategoriesSoldByAgent(@PathVariable("idAgent") Long idAgent, @PathVariable("month") String month,
-                                                @PathVariable("numberOfCategories") Integer numberOfCategories){
-        return orderService.getCategoriesSoldByAgent(idAgent, numberOfCategories, month);
-    }
-
-    @Transactional
     @GetMapping("category-by-agent/{idAgent}/{categoryName}/{month}")
     public Graph getCategoryForAgent(@PathVariable("idAgent") Long idAgent, @PathVariable("month") String month,
                                      @PathVariable("categoryName") String categoryName){
